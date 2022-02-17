@@ -21,8 +21,3 @@ touch tendermint/types/__init__.py
 touch tendermint/crypto/__init__.py
 touch tendermint/version/__init__.py
 touch tendermint/store/__init__.py
-
-protoc \
-  --proto_path="${GIT_HOME}/gogoprotobuf" \
-  --python_out=.. \
-  "${GIT_HOME}/gogoprotobuf/gogoproto/gogo.proto" \
