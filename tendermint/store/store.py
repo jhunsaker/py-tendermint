@@ -35,6 +35,16 @@ class BlockStore:
     state.ParseFromString(bz)
     return state
 
+  @property
+  def base(self):
+
+    return self._base
+
+  @property
+  def height(self):
+
+    return self._height
+
   def load_block_meta(self, height: int):
 
     key = calc_block_meta_key(height=height)
@@ -64,20 +74,6 @@ class BlockStore:
     block = Block()
     block.ParseFromString(bz)
     return block
-
-  def base(self):
-
-    it = self._db.iterator(prefix=BLOCK_META_PREFIX, include_value=False)
-    key = next(it)
-    return decode_block_meta_key(key)
-
-  def height(self):
-
-    it = self._db.iterator(
-      reverse=True, prefix=BLOCK_META_PREFIX, include_value=False
-    )
-    key = next(it)
-    return decode_block_meta_key(key)
 
 def calc_block_meta_key(height: int) -> bytes:
 
